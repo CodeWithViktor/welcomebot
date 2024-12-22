@@ -1,25 +1,25 @@
-# Import necessary packages 
+# CWV Import necessary packages 
 import discord
 import os
 import json
 from discord.ext import commands
 
-# Setting Intents
+# CWV Setting Intents
 intents = discord.Intents.default()
-intents.members = True  # Subscribe to member events
-intents.presences = True  # Subscribe to presence events
+intents.members = True  # CWV Subscribe to member events
+intents.presences = True  # CWV Subscribe to presence events
 intents.message_content = True
 bot = commands.Bot(command_prefix='+', intents=intents)
 
-# Events and Status
+# CWV Events and Status
 @bot.event
 async def on_ready():
     await bot.tree.sync()
     print(f'{bot.user} has connected to Discord!')
     await bot.change_presence(status=discord.Status.online, activity=discord.Game('+help | CodeWithViktor'))
 
-# Commands
-# 1) Help Command
+# CWV Commands
+# CWV 1) Help Command
 bot.remove_command('help')
 @bot.command(name='help')
 async def help(ctx):
@@ -29,7 +29,7 @@ async def help(ctx):
     embed.set_footer(text='Made by @CodeWithViktor')
     await ctx.send(embed=embed)
 
-# 2) About command
+# CWV 2) About command
 @bot.command(name='about')
 async def about(ctx):
     embed = discord.Embed(title="Bot Information", color=0x00ff00)
@@ -41,7 +41,7 @@ async def about(ctx):
     embed.set_footer(text='Made by @CodeWithViktor')
     await ctx.send(embed=embed)
 
-# 3) Dev Info Command [Don't remove mycredit, else do as you want]
+# CWV 3) Dev Info Command [Don't remove mycredit, else do as you want]
 @bot.command(name='aboutdev')
 async def aboutdev(ctx):
     embed = discord.Embed(title="About Developer", color=0x00ff00)
@@ -49,7 +49,7 @@ async def aboutdev(ctx):
     embed.set_footer(text='Made by @CodeWithViktor')
     await ctx.send(embed=embed)
 
-# 4) Ping Command
+# CWV 4) Ping Command
 @bot.command(name='ping')
 async def ping(ctx):
     latency = bot.latency * 1000
@@ -57,7 +57,7 @@ async def ping(ctx):
     embed.set_footer(text='Made by @CodeWithViktor')
     await ctx.send(embed=embed)
 
-# 5) welcomemessage command (Don't try to change anything)
+# CWV 5) welcomemessage command (Don't try to change anything)
 @bot.command(name='setwelcome')
 @commands.has_permissions(manage_guild=True)
 async def setwelcome(ctx):
@@ -133,11 +133,11 @@ async def setwelcome(ctx):
     footer = msg.content
 
     embed = discord.Embed(title='**Welcome Embed Message Setup**', color=0x00ff00)
-    embed.add_field(name='Color', value='Please enter the color for the welcome embed message (in hex format, e.g. #ffffff).', inline=False)
+    embed.add_field(name='Color', value='Please enter the color for the welcome embed message (in hex format, e.g. # CWVffffff).', inline=False)
     await ctx.send(embed=embed)
 
     msg = await bot.wait_for('message', check=check)
-    color = int(msg.content.lstrip('#'), 16)
+    color = int(msg.content.lstrip('# CWV'), 16)
 
     setwelcome_data[str(ctx.guild.id)] = {
         'channel_id': channel.id,
@@ -172,7 +172,7 @@ async def on_member_join(member):
 
         await channel.send(f'Welcome {member.mention} to the server!', embed=embed)
 
-# 6) deletewcmessage
+# CWV 6) deletewcmessage
 @bot.command(name='deletewelcome')
 @commands.has_permissions(manage_guild=True)
 async def deletewelcome(ctx):
@@ -197,5 +197,5 @@ async def deletewelcome(ctx):
         embed.add_field(name='Error!', value='No welcome embed message setup found for this server.', inline=False)
         await ctx.send(embed=embed)
 
-# BOT_TOKEN
+# CWV BOT_TOKEN
 bot.run('')
